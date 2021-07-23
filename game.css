@@ -17,7 +17,6 @@ body {
     box-shadow: 0 0.4rem 1.4rem 0 rgba(6, 103, 247, 0.5);
     transform: scale(1.02);
     transform: transform 100ms;
-
 }
 
 .choice-prefix {
@@ -33,45 +32,42 @@ body {
 .correct {
     background: green;
 }
+
 .incorrect {
     background: red;
-}    
-
-
-
+}
 
 #hud {
     display: flex;
     justify-content: space-between;
 }
+
 .hud-prefix {
     text-align: center;
     font-size: 2rem;
 }
+
 .hud-main-text {
     text-align: center;
 }
-#progressBar {
+
+#proBar {
     width: 30rem;
     height: 3rem;
-    border: rgb(248, 248, 248);
+    border: 0.2rem solid rgb(81, 146, 110);
     margin-top: 2rem;
     border-radius: 50px;
     overflow: hidden;
-    
 }
- #progressBarFull {
-     height: 100%;
-     background: springgreen;
-     width: 0%;
- }
 
-
+#proBarFull {
+    height: 100%;
+    background: springgreen;
+    width: 0%;
+}
 
 @media screen and (max-width: 768px) {
     .choice-container {
         min-width: 40rem;
     }
-    
 }
-
