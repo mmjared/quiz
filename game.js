@@ -5,19 +5,46 @@ const scoreText = document.querySelector("#score");
 const proBarFull = document.querySelector("#proBarFull");
 
 let currentQuestion = {};
+let timeEl = document.querySelector(".timer");
+let secondsLeft = 60;
 let acceptingAnswers = true;
 let score = 0;
 let questionCounter = 0;
 let availableQuestions = [];
 
 let questions = [{
-    question: "what is 2 + 2?",
-    choice1: "2",
-    choice2: "4",
-    choice3: "6",
-    choice4: "8",
-    answer: 4,
-}, ];
+        question: "On Every Continent, There Is A City Named What??",
+        choice1: "miami",
+        choice2: "belgum",
+        choice3: "denver",
+        choice4: "rome",
+        answer: 4,
+    }, {
+        question: "how do planes fly?",
+        choice1: "engines",
+        choice2: "anti-gravity",
+        choice3: "baloons",
+        choice4: "hot air",
+        answer: 1,
+    },
+    {
+        question: "whats the coldest place on earth?",
+        choice1: "iceland",
+        choice2: "siberia",
+        choice3: "poland",
+        choice4: "antarctica",
+        answer: 4,
+    },
+    {
+        question: "where is the deepest hole in the world?",
+        choice1: "pikes peak",
+        choice2: "kola",
+        choice3: "grand canyon",
+        choice4: "Mariana Trench",
+        answer: 2,
+    },
+
+];
 
 const SCORE_POINTS = 100;
 const MAX_QUESTIONS = 4;
@@ -36,42 +63,60 @@ getNewQuestion = () => {
         return window.location.assign("/end.html");
     }
     questionCounter++;
-    progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`;
-    proBarFull.style.width = `${(questionCounter / MAX_QUESTIONS) * 100}%`;
+    progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
+    proBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
 
-    const questionIndex = Math.floor(Math.random() * availableQuestions.length);
-    currentQuestion = availableQuestions[questionIndex];
-    question.innerText = currentQuestion.question;
+    const questionIndex = Math.floor(Math.random() * availableQuestions.length)
+    currentQuestion = availableQuestions[questionIndex]
+    question.innerText = currentQuestion.question
     choices.forEach((choice) => {
-        const number = choice.dataset["number"];
-        choice.innerText = currentQuestion["choice" + number];
+        const number = choice.dataset["number"]
+        choice.innerText = currentQuestion['choice' + number]
     });
 
-    availableQuestions.splice(questionIndex, 1);
+    availableQuestions.splice(questionIndex, 1)
 
-    acceptingAnswers = true;
+    acceptingAnswers = true
 };
 
-choices.forEach((choice) => {
-    choice.addEventListener("click", (e) => {
-        if (!acceptingAnswers) return;
+function setTime() {
+    let timerInterval = setInterval(function() {
+        secondsLeft--;
+        timeEl.textContent = secondsLeft;
 
-        acceptingAnswers = false;
-        const selectedChoice = e.target;
-        const selectedAnswer = selectedChoice.dataset["number"];
+        if (secondsLeft === 0) {
+            clearInterval(timerInterval);
+            sendMessage()
+        }
+    }, 1000)
+}
+
+function sendMessage() {
+    timeEl.textContent = "your done!";
+    window.location.assign('./end.html');
+}
+setTime()
+
+choices.forEach((choice) => {
+    choice.addEventListener("click", e => {
+        if (!acceptingAnswers) return
+
+        acceptingAnswers = false
+        const selectedChoice = e.target
+        const selectedAnswer = selectedChoice.dataset['number']
 
         let classToApply =
-            selectedAnswer === currentQuestion.answer ? "correct" : "incorrect";
+            selectedAnswer == currentQuestion.answer ? "correct" : "incorrect";
 
         if (classToApply === "correct") {
-            incrementScore(SCORE_POINTS);
+            incrementScore(SCORE_POINTS)
         }
 
         selectedChoice.parentElement.classList.add(classToApply);
         setTimeout(() => {
             selectedChoice.parentElement.classList.remove(classToApply);
             getNewQuestion();
-        }, 1000);
+        }, 1000)
     });
 });
 
