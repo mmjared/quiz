@@ -1,18 +1,19 @@
 const question = document.querySelector("#question");
 const choices = Array.from(document.querySelectorAll(".choice-text"));
-const progressText = document.querySelector("#progressText");
+const progressText = document.querySelectorAll("#progressText");
 const scoreText = document.querySelector("#score");
 const proBarFull = document.querySelector("#proBarFull");
 
-let currentQuestion = {};
-let timeEl = document.querySelector(".timer");
-let secondsLeft = 60;
-let acceptingAnswers = true;
-let score = 0;
-let questionCounter = 0;
-let availableQuestions = [];
 
-let questions = [{
+var currentQuestion = {};
+var timeEl = document.querySelector(".timer");
+var secondsLeft = 60;
+var acceptingAnswers = true;
+var score = 0;
+var questionCounter = 0;
+var availableQuestions = [];
+
+var questions = [{
         question: "On Every Continent, There Is A City Named What??",
         choice1: "miami",
         choice2: "belgum",
@@ -47,7 +48,7 @@ let questions = [{
 ];
 
 const SCORE_POINTS = 100;
-const MAX_QUESTIONS = 4;
+const MAX_QUESTIONS = 5;
 
 startGame = () => {
     questionCounter = 0;
@@ -58,12 +59,12 @@ startGame = () => {
 
 getNewQuestion = () => {
     if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
-        localStorage.setItem("mostRecentScore", score);
+        localStorage.getItem("mostRecentScore", score);
 
-        return window.location.assign("/end.html");
+        return window.location.assign('./end.html');
     }
     questionCounter++;
-    progressText.innerText = `Question ${questionCounter} of ${MAX_QUESTIONS}`
+    progressText.innerText = `Questions ${questionCounter} of ${MAX_QUESTIONS}`
     proBarFull.style.width = `${(questionCounter/MAX_QUESTIONS) * 100}%`
 
     const questionIndex = Math.floor(Math.random() * availableQuestions.length)
@@ -115,7 +116,7 @@ choices.forEach((choice) => {
         selectedChoice.parentElement.classList.add(classToApply);
         setTimeout(() => {
             selectedChoice.parentElement.classList.remove(classToApply);
-            getNewQuestion();
+            getNewQuestion()
         }, 1000)
     });
 });
