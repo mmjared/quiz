@@ -5,15 +5,15 @@ const scoreText = document.querySelector("#score");
 const proBarFull = document.querySelector("#proBarFull");
 
 
-let currentQuestion = {};
-let timeEl = document.querySelectorAll("timer");
-let secondsLeft = 60;
-let acceptingAnswers = true;
-let score = 0;
-let questionCounter = 0;
-let availableQuestions = [];
+var currentQuestion = {};
+var timeEl = document.querySelectorAll(".timer");
+var secondsLeft = 60;
+var acceptingAnswers = true;
+var score = 0;
+var questionCounter = 0;
+var availableQuestions = [];
 
-let questions = [{
+var questions = [{
         question: "On Every Continent, There Is A City Named What??",
         choice1: "miami",
         choice2: "belgum",
@@ -53,7 +53,7 @@ const MAX_QUESTIONS = 5;
 startGame = () => {
     questionCounter = 0;
     score = 0;
-    availableQuestions = [...question];
+    availableQuestions = [...questions];
     getNewQuestion();
 };
 
@@ -126,4 +126,4 @@ incrementScore = (num) => {
     scoreText.innerText = score;
 };
 
-startGame = ("");
+startGame();
