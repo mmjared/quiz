@@ -1,0 +1,19 @@
+{
+  "name": "quiz",
+  "version": "1.0.0",
+  "description": "this took a total of 33 hours i used google and youtube to help with js  i went with a vintage theme beacuse its pretty primitive",
+  "main": "end.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmjared/quiz.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mmjared/quiz/issues"
+  },
+  "homepage": "https://github.com/mmjared/quiz#readme"
+}
